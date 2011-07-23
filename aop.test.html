@@ -1,0 +1,53 @@
+<html>
+
+    <head>
+    </head>
+    <body>
+    <link rel='stylesheet' type='text/css' href='deps/unittest.css' />
+    <script src='deps/unittest.js'></script> 
+
+    <script>
+
+        UnitTest.run(function(){
+            //UnitTest.assertEqual(A.a(),'bar A');
+            //UnitTest.assertEqual(c.a(),'foo c bar c');
+            
+            // test aop
+            var OF=[0,0,0,0,0];
+            
+            F = AOP(function() {
+                OF[2] = OF[1] + 2; // should ensure correct order.
+            });
+            
+            F.on({
+                when:'after',
+                cb:function(){ 
+                    OF[3] = OF[2] + 4; // should ensure correct order
+                }
+            });
+            
+            F.on({
+                when:'before',
+                cb:function(){
+                    OF[1] = 2;
+            }});
+            
+            F.before(function(){
+                OF[0] = 1;
+            });
+            
+            F.after(function() {
+                OF[4] = OF[2] + 12
+            });
+            
+            F();
+
+            for (var i = 0; i < 5; i++) {
+                UnitTest.assertEqual(OF[i],Math.pow(2,i),'callback '+i);
+            }
+            
+        });
+        
+    </script>
+
+</body>
