@@ -15,9 +15,10 @@ I dropped the course and took graphics instead, so be forwarned: I may not know 
 Implicit Events
 ---------------
 
-Certain frameworks let us have custom events, something like this:
-```
-some_observable = new Observable({
+Certain frameworks let us have custom events, something like this.
+
+```javascript
+var some_observable = new Observable({
     events: ['custom_event']
 });
 
@@ -29,9 +30,10 @@ some_observable.on('custom event', function(){
 observable.fireEvent('custom event');
 ```
 
-Without having certain heavy frameworks, aop.js gives you something nearly equivalent, but more flexible:
-```
-some_function = AOP(function(){
+Without having certain heavy frameworks, aop.js gives you something nearly equivalent, but more flexible.
+
+```javascript
+var some_function = AOP(function(){
     
 })
 
@@ -45,8 +47,8 @@ some_function();
 That is, your custom event fires implicitly when your function is called. This particular behaviour is the part of AOP I've found useful.
 However, in an attempt to do some justice to traditional AOP, here's some VERY BASIC "crosscutting", which is a core part of the AOP paradigm.
 
-```
-animalRenderer = {
+```javascript
+var animalRenderer = {
     drawDog: function(){
         // queue a dog shape to be rendered.
     },
